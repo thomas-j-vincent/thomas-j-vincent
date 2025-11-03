@@ -1,4 +1,4 @@
-![](github_banner.jpg)
+![](github_banner.png)
 
 <!--
 **thomas-j-vincent/thomas-j-vincent** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
