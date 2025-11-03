@@ -1,13 +1,4 @@
-## Hi there 👋
-
-this is a test to see how far down it can go to look good
-this is a test to see how far down it can go to look good
-this is a test to see how far down it can go to look good
-this is a test to see how far down it can go to look good
-this is a test to see how far down it can go to look good
-this is a test to see how far down it can go to look good
-this is a test to see how far down it can go to look good
-this is a test to see how far down it can go to look good
+![](github_banner.jpg)
 
 <!--
 **thomas-j-vincent/thomas-j-vincent** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
