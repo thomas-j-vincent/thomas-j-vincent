@@ -54,7 +54,7 @@ async function main() {
   const CELL = 11;
   const GAP = 3;
   const STEP = CELL + GAP;
-  const STAGGER = 0.012; // seconds added per square, in load order
+  const STAGGER = 0.015; // seconds added per square, in load order
   const OUTER_PADDING = 14; // gap between the border and everything inside it
   const MARGIN_LEFT = 28;   // room for "Mon" / "Wed" / "Fri", inside the border
   const MARGIN_TOP = 18;    // room for month names, inside the border
@@ -139,7 +139,7 @@ async function main() {
   }
   .lbl {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 9px;
+    font-size: 12px;
     fill: #656d76;
   }
   .border {
