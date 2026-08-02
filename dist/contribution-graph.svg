@@ -18,7 +18,6 @@
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 12px;
     weight: 400;
-    line-height: 1.5;
     fill: #656d76;
   }
 </style>
@@ -403,8 +402,8 @@
 <rect class="cell" x="756" y="88" width="11" height="11" rx="2" fill="#ebedf0" style="animation-delay:4.332s"><title>2026-07-30: 0 contributions</title></rect>
 <rect class="cell" x="756" y="102" width="11" height="11" rx="2" fill="#ebedf0" style="animation-delay:4.344s"><title>2026-07-31: 0 contributions</title></rect>
 <rect class="cell" x="756" y="116" width="11" height="11" rx="2" fill="#ebedf0" style="animation-delay:4.356s"><title>2026-08-01: 0 contributions</title></rect>
-<rect class="cell" x="770" y="32" width="11" height="11" rx="2" fill="#9be9a8" style="animation-delay:4.368s"><title>2026-08-02: 9 contributions</title></rect>
-<rect class="cell" x="770" y="46" width="11" height="11" rx="2" fill="#9be9a8" style="animation-delay:4.380s"><title>2026-08-03: 1 contributions</title></rect>
+<rect class="cell" x="770" y="32" width="11" height="11" rx="2" fill="#9be9a8" style="animation-delay:4.368s"><title>2026-08-02: 10 contributions</title></rect>
+<rect class="cell" x="770" y="46" width="11" height="11" rx="2" fill="#9be9a8" style="animation-delay:4.380s"><title>2026-08-03: 2 contributions</title></rect>
 <text class="lbl" x="662" y="151">Less</text>
 <rect x="688" y="142" width="10" height="10" rx="2" fill="#ebedf0"/>
 <rect x="702" y="142" width="10" height="10" rx="2" fill="#9be9a8"/>
