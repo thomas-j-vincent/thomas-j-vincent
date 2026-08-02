@@ -55,6 +55,7 @@ async function main() {
   const GAP = 3;
   const STEP = CELL + GAP;
   const STAGGER = 0.012; // seconds added per square, in load order
+  const OUTER_PADDING = 14; // gap between the border and everything inside it
   const MARGIN_LEFT = 28;
   const MARGIN_TOP = 18;
   const LEGEND_HEIGHT = 22;
@@ -62,6 +63,10 @@ async function main() {
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
   ];
+
+  // OFFSET_X / OFFSET_Y shift every shape inward, away from the border.
+  const OFFSET_X = OUTER_PADDING + MARGIN_LEFT;
+  const OFFSET_Y = OUTER_PADDING + MARGIN_TOP;
 
   let index = 0;
   let rects = "";
@@ -79,9 +84,9 @@ async function main() {
       }
     }
 
-    week.contributionDays.forEach((day, dayIdx) => {
-      const x = MARGIN_LEFT + weekIdx * STEP;
-      const y = MARGIN_TOP + dayIdx * STEP;
+        week.contributionDays.forEach((day, dayIdx) => {
+      const x = OFFSET_X + weekIdx * STEP;
+      const y = OFFSET_Y + dayIdx * STEP;
       const delay = (index * STAGGER).toFixed(3);
       rects += `<rect class="cell" x="${x}" y="${y}" width="${CELL}" height="${CELL}" rx="2" fill="${day.color}" style="animation-delay:${delay}s"><title>${day.date}: ${day.contributionCount} contributions</title></rect>\n`;
       index++;
@@ -90,14 +95,18 @@ async function main() {
 
   // Day-of-week labels, matching GitHub's own layout (Mon, Wed, Fri only)
   const dayLabels = `
-<text class="lbl" x="0" y="${MARGIN_TOP + 1 * STEP + 9}">Mon</text>
-<text class="lbl" x="0" y="${MARGIN_TOP + 3 * STEP + 9}">Wed</text>
-<text class="lbl" x="0" y="${MARGIN_TOP + 5 * STEP + 9}">Fri</text>
+<text class="lbl" x="${OUTER_PADDING}" y="${OFFSET_Y + 1 * STEP + 9}">Mon</text>
+<text class="lbl" x="${OUTER_PADDING}" y="${OFFSET_Y + 3 * STEP + 9}">Wed</text>
+<text class="lbl" x="${OUTER_PADDING}" y="${OFFSET_Y + 5 * STEP + 9}">Fri</text>
 `;
 
-  const width = MARGIN_LEFT + weeks.length * STEP;
-  const gridHeight = MARGIN_TOP + 7 * STEP;
-  const height = gridHeight + LEGEND_HEIGHT;
+  const contentWidth = MARGIN_LEFT + weeks.length * STEP;
+  const contentGridHeight = MARGIN_TOP + 7 * STEP;
+  const contentHeight = contentGridHeight + LEGEND_HEIGHT;
+
+  const width = contentWidth + OUTER_PADDING * 2;
+  const gridHeight = OFFSET_Y + 7 * STEP; // bottom of the last row of squares
+  const height = contentHeight + OUTER_PADDING * 2;
 
   const legendColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
   const legendStartX = width - legendColors.length * 14 - 40;
@@ -108,12 +117,18 @@ async function main() {
   });
   legend += `<text class="lbl" x="${legendStartX + legendColors.length * 14 + 4}" y="${legendY + 9}">More</text>\n`;
 
+    // The border that frames the whole graph, like the card GitHub draws
+  // around the real contribution graph.
+  const border = `<rect class="border" x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="6"/>\n`;
+  
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img">
 <title>${USERNAME}'s contribution graph</title>
 <style>
   .cell {
     opacity: 0;
     animation: fadeInSq 0.35s ease-out forwards;
+    stroke: rgba(27, 31, 36, 0.06);
+    stroke-width: 1px;
   }
   @keyframes fadeInSq {
     from { opacity: 0; }
@@ -124,7 +139,9 @@ async function main() {
   }
   .lbl {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 9px;
+    font-size: 12px;
+    weight: 400;
+    line-height: 1.5;
     fill: #656d76;
   }
 </style>
