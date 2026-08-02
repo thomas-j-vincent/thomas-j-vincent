@@ -4,6 +4,7 @@
 I'm currently a university student studying mechanical engineering with a desire to work in either quantitative finance or the aeronautics industry, and would welcome any help getting into either of those fields in the united kingdom. I'm looking to gain experience in coding simulations or bots in languages such as python, C++ and javascript so feel free to reach out if you have any projects you need help with or need a partner for a hackathon (although i've never done one before) 
 <br>
 <br>
+![My contribution banner](https://raw.githubusercontent.com/thomas-j-vincent/thomas-j-vincent/main/dist/contribution-banner.svg)
 ![My contribution graph](https://raw.githubusercontent.com/thomas-j-vincent/thomas-j-vincent/main/dist/contribution-graph.svg)
 
 <!--

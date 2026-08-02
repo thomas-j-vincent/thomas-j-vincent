@@ -84,11 +84,6 @@ async function main() {
     font-size: 12px;
     fill: #24292f;
   }
-  .btn {
-    fill: #f6f8fa;
-    stroke: #d0d7de;
-    stroke-width: 1px;
-  }
   .chevron {
     stroke: #24292f;
     stroke-width: 1.4px;
@@ -99,12 +94,10 @@ async function main() {
   @media (prefers-color-scheme: dark) {
     .label { fill: #e6edf3; }
     .btn-text { fill: #c9d1d9; }
-    .btn { fill: #21262d; stroke: #30363d; }
     .chevron { stroke: #c9d1d9; }
   }
 </style>
 <text class="label" x="${PADDING}" y="${HEIGHT / 2 + 5}"><tspan font-weight="600">${totalFormatted}</tspan> contributions in the last year</text>
-<rect class="btn" x="${buttonX}" y="${buttonY}" width="${buttonWidth}" height="26" rx="6"/>
 <text class="btn-text" x="${buttonX + BUTTON_PADDING_X}" y="${HEIGHT / 2 + 4}">${BUTTON_LABEL}</text>
 <polyline class="chevron" points="${buttonX + buttonWidth - CHEVRON_GAP + 3},${HEIGHT / 2 - 3} ${buttonX + buttonWidth - CHEVRON_GAP + 8},${HEIGHT / 2 + 2} ${buttonX + buttonWidth - CHEVRON_GAP + 13},${HEIGHT / 2 - 3}"/>
 </svg>
