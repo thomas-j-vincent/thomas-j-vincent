@@ -56,9 +56,9 @@ async function main() {
   const STEP = CELL + GAP;
   const STAGGER = 0.012; // seconds added per square, in load order
   const OUTER_PADDING = 14; // gap between the border and everything inside it
-  const MARGIN_LEFT = 28;
-  const MARGIN_TOP = 18;
-  const LEGEND_HEIGHT = 22;
+  const MARGIN_LEFT = 28;   // room for "Mon" / "Wed" / "Fri", inside the border
+  const MARGIN_TOP = 18;    // room for month names, inside the border
+  const LEGEND_HEIGHT = 22; // room for the "Less -> More" legend, inside the border
   const MONTH_NAMES = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
@@ -78,13 +78,13 @@ async function main() {
     if (firstDay) {
       const month = new Date(firstDay.date).getMonth();
       if (month !== lastMonth) {
-        const x = MARGIN_LEFT + weekIdx * STEP;
-        monthLabels += `<text class="lbl" x="${x}" y="${MARGIN_TOP - 6}">${MONTH_NAMES[month]}</text>\n`;
+        const x = OFFSET_X + weekIdx * STEP;
+        monthLabels += `<text class="lbl" x="${x}" y="${OFFSET_Y - 6}">${MONTH_NAMES[month]}</text>\n`;
         lastMonth = month;
       }
     }
 
-        week.contributionDays.forEach((day, dayIdx) => {
+    week.contributionDays.forEach((day, dayIdx) => {
       const x = OFFSET_X + weekIdx * STEP;
       const y = OFFSET_Y + dayIdx * STEP;
       const delay = (index * STAGGER).toFixed(3);
@@ -109,7 +109,7 @@ async function main() {
   const height = contentHeight + OUTER_PADDING * 2;
 
   const legendColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
-  const legendStartX = width - legendColors.length * 14 - 40;
+  const legendStartX = width - OUTER_PADDING - legendColors.length * 14 - 40;
   const legendY = gridHeight + 12;
   let legend = `<text class="lbl" x="${legendStartX - 26}" y="${legendY + 9}">Less</text>\n`;
   legendColors.forEach((color, i) => {
@@ -117,7 +117,7 @@ async function main() {
   });
   legend += `<text class="lbl" x="${legendStartX + legendColors.length * 14 + 4}" y="${legendY + 9}">More</text>\n`;
 
-    // The border that frames the whole graph, like the card GitHub draws
+  // The border that frames the whole graph, like the card GitHub draws
   // around the real contribution graph.
   const border = `<rect class="border" x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="6"/>\n`;
 
@@ -139,12 +139,20 @@ async function main() {
   }
   .lbl {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    weight: 400;
+    font-size: 9px;
     fill: #656d76;
   }
+  .border {
+    fill: none;
+    stroke: #d0d7de;
+    stroke-width: 1px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .border { stroke: #30363d; }
+    .lbl { fill: #848d97; }
+  }
 </style>
-${monthLabels}${dayLabels}${rects}${legend}</svg>
+${border}${monthLabels}${dayLabels}${rects}${legend}</svg>
 `;
 
   const outDir = path.join(__dirname, "..", "dist");
