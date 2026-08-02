@@ -1,5 +1,10 @@
 ![](github_banner.png)  <br>
 
+
+
+
+
+
 ![My contribution graph](https://raw.githubusercontent.com/thomas-j-vincent/thomas-j-vincent/main/dist/contribution-graph.svg)
 
 <!--
