@@ -120,7 +120,7 @@ async function main() {
     // The border that frames the whole graph, like the card GitHub draws
   // around the real contribution graph.
   const border = `<rect class="border" x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="6"/>\n`;
-  
+
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img">
 <title>${USERNAME}'s contribution graph</title>
 <style>
@@ -141,7 +141,6 @@ async function main() {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 12px;
     weight: 400;
-    line-height: 1.5;
     fill: #656d76;
   }
 </style>
