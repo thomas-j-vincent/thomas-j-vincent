@@ -16,24 +16,33 @@
   }
   .lbl {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    weight: 400;
+    font-size: 9px;
     fill: #656d76;
   }
+  .border {
+    fill: none;
+    stroke: #d0d7de;
+    stroke-width: 1px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .border { stroke: #30363d; }
+    .lbl { fill: #848d97; }
+  }
 </style>
-<text class="lbl" x="28" y="12">Aug</text>
-<text class="lbl" x="98" y="12">Sep</text>
-<text class="lbl" x="154" y="12">Oct</text>
-<text class="lbl" x="210" y="12">Nov</text>
-<text class="lbl" x="280" y="12">Dec</text>
-<text class="lbl" x="336" y="12">Jan</text>
-<text class="lbl" x="392" y="12">Feb</text>
-<text class="lbl" x="448" y="12">Mar</text>
-<text class="lbl" x="518" y="12">Apr</text>
-<text class="lbl" x="574" y="12">May</text>
-<text class="lbl" x="644" y="12">Jun</text>
-<text class="lbl" x="700" y="12">Jul</text>
-<text class="lbl" x="756" y="12">Aug</text>
+<rect class="border" x="0.5" y="0.5" width="797" height="165" rx="6"/>
+<text class="lbl" x="42" y="26">Aug</text>
+<text class="lbl" x="112" y="26">Sep</text>
+<text class="lbl" x="168" y="26">Oct</text>
+<text class="lbl" x="224" y="26">Nov</text>
+<text class="lbl" x="294" y="26">Dec</text>
+<text class="lbl" x="350" y="26">Jan</text>
+<text class="lbl" x="406" y="26">Feb</text>
+<text class="lbl" x="462" y="26">Mar</text>
+<text class="lbl" x="532" y="26">Apr</text>
+<text class="lbl" x="588" y="26">May</text>
+<text class="lbl" x="658" y="26">Jun</text>
+<text class="lbl" x="714" y="26">Jul</text>
+<text class="lbl" x="770" y="26">Aug</text>
 
 <text class="lbl" x="14" y="55">Mon</text>
 <text class="lbl" x="14" y="83">Wed</text>
@@ -402,13 +411,13 @@
 <rect class="cell" x="756" y="88" width="11" height="11" rx="2" fill="#ebedf0" style="animation-delay:4.332s"><title>2026-07-30: 0 contributions</title></rect>
 <rect class="cell" x="756" y="102" width="11" height="11" rx="2" fill="#ebedf0" style="animation-delay:4.344s"><title>2026-07-31: 0 contributions</title></rect>
 <rect class="cell" x="756" y="116" width="11" height="11" rx="2" fill="#ebedf0" style="animation-delay:4.356s"><title>2026-08-01: 0 contributions</title></rect>
-<rect class="cell" x="770" y="32" width="11" height="11" rx="2" fill="#9be9a8" style="animation-delay:4.368s"><title>2026-08-02: 10 contributions</title></rect>
-<rect class="cell" x="770" y="46" width="11" height="11" rx="2" fill="#9be9a8" style="animation-delay:4.380s"><title>2026-08-03: 2 contributions</title></rect>
-<text class="lbl" x="662" y="151">Less</text>
-<rect x="688" y="142" width="10" height="10" rx="2" fill="#ebedf0"/>
-<rect x="702" y="142" width="10" height="10" rx="2" fill="#9be9a8"/>
-<rect x="716" y="142" width="10" height="10" rx="2" fill="#40c463"/>
-<rect x="730" y="142" width="10" height="10" rx="2" fill="#30a14e"/>
-<rect x="744" y="142" width="10" height="10" rx="2" fill="#216e39"/>
-<text class="lbl" x="762" y="151">More</text>
+<rect class="cell" x="770" y="32" width="11" height="11" rx="2" fill="#9be9a8" style="animation-delay:4.368s"><title>2026-08-02: 11 contributions</title></rect>
+<rect class="cell" x="770" y="46" width="11" height="11" rx="2" fill="#9be9a8" style="animation-delay:4.380s"><title>2026-08-03: 4 contributions</title></rect>
+<text class="lbl" x="648" y="151">Less</text>
+<rect x="674" y="142" width="10" height="10" rx="2" fill="#ebedf0"/>
+<rect x="688" y="142" width="10" height="10" rx="2" fill="#9be9a8"/>
+<rect x="702" y="142" width="10" height="10" rx="2" fill="#40c463"/>
+<rect x="716" y="142" width="10" height="10" rx="2" fill="#30a14e"/>
+<rect x="730" y="142" width="10" height="10" rx="2" fill="#216e39"/>
+<text class="lbl" x="748" y="151">More</text>
 </svg>
