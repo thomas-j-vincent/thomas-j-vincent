@@ -55,23 +55,59 @@ async function main() {
   const GAP = 3;
   const STEP = CELL + GAP;
   const STAGGER = 0.012; // seconds added per square, in load order
+  const MARGIN_LEFT = 28;
+  const MARGIN_TOP = 18;
+  const LEGEND_HEIGHT = 22;
+  const MONTH_NAMES = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  ];
 
   let index = 0;
   let rects = "";
+  let monthLabels = "";
+  let lastMonth = -1;
 
-  weeks.forEach((week, weekIdx) => {
+ weeks.forEach((week, weekIdx) => {
+    const firstDay = week.contributionDays[0];
+    if (firstDay) {
+      const month = new Date(firstDay.date).getMonth();
+      if (month !== lastMonth) {
+        const x = MARGIN_LEFT + weekIdx * STEP;
+        monthLabels += `<text class="lbl" x="${x}" y="${MARGIN_TOP - 6}">${MONTH_NAMES[month]}</text>\n`;
+        lastMonth = month;
+      }
+    }
+ 
     week.contributionDays.forEach((day, dayIdx) => {
-      const x = weekIdx * STEP;
-      const y = dayIdx * STEP;
+      const x = MARGIN_LEFT + weekIdx * STEP;
+      const y = MARGIN_TOP + dayIdx * STEP;
       const delay = (index * STAGGER).toFixed(3);
       rects += `<rect class="cell" x="${x}" y="${y}" width="${CELL}" height="${CELL}" rx="2" fill="${day.color}" style="animation-delay:${delay}s"><title>${day.date}: ${day.contributionCount} contributions</title></rect>\n`;
       index++;
     });
   });
-
-  const width = weeks.length * STEP;
-  const height = 7 * STEP;
-
+ 
+  // Day-of-week labels, matching GitHub's own layout (Mon, Wed, Fri only)
+  const dayLabels = `
+<text class="lbl" x="0" y="${MARGIN_TOP + 1 * STEP + 9}">Mon</text>
+<text class="lbl" x="0" y="${MARGIN_TOP + 3 * STEP + 9}">Wed</text>
+<text class="lbl" x="0" y="${MARGIN_TOP + 5 * STEP + 9}">Fri</text>
+`;
+ 
+  const width = MARGIN_LEFT + weeks.length * STEP;
+  const gridHeight = MARGIN_TOP + 7 * STEP;
+  const height = gridHeight + LEGEND_HEIGHT;
+ 
+  const legendColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+  const legendStartX = width - legendColors.length * 14 - 40;
+  const legendY = gridHeight + 12;
+  let legend = `<text class="lbl" x="${legendStartX - 26}" y="${legendY + 9}">Less</text>\n`;
+  legendColors.forEach((color, i) => {
+    legend += `<rect x="${legendStartX + i * 14}" y="${legendY}" width="10" height="10" rx="2" fill="${color}"/>\n`;
+  });
+  legend += `<text class="lbl" x="${legendStartX + legendColors.length * 14 + 4}" y="${legendY + 9}">More</text>\n`;
+ 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img">
 <title>${USERNAME}'s contribution graph</title>
 <style>
@@ -86,10 +122,15 @@ async function main() {
   @media (prefers-reduced-motion: reduce) {
     .cell { animation: none; opacity: 1; }
   }
+  .lbl {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    fill: #656d76;
+  }
 </style>
-${rects}</svg>
+${monthLabels}${dayLabels}${rects}${legend}</svg>
 `;
-
+ 
   const outDir = path.join(__dirname, "..", "dist");
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, "contribution-graph.svg"), svg);
