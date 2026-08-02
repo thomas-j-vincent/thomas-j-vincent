@@ -68,7 +68,7 @@ async function main() {
   let monthLabels = "";
   let lastMonth = -1;
 
- weeks.forEach((week, weekIdx) => {
+  weeks.forEach((week, weekIdx) => {
     const firstDay = week.contributionDays[0];
     if (firstDay) {
       const month = new Date(firstDay.date).getMonth();
@@ -78,7 +78,7 @@ async function main() {
         lastMonth = month;
       }
     }
- 
+
     week.contributionDays.forEach((day, dayIdx) => {
       const x = MARGIN_LEFT + weekIdx * STEP;
       const y = MARGIN_TOP + dayIdx * STEP;
@@ -87,18 +87,18 @@ async function main() {
       index++;
     });
   });
- 
+
   // Day-of-week labels, matching GitHub's own layout (Mon, Wed, Fri only)
   const dayLabels = `
 <text class="lbl" x="0" y="${MARGIN_TOP + 1 * STEP + 9}">Mon</text>
 <text class="lbl" x="0" y="${MARGIN_TOP + 3 * STEP + 9}">Wed</text>
 <text class="lbl" x="0" y="${MARGIN_TOP + 5 * STEP + 9}">Fri</text>
 `;
- 
+
   const width = MARGIN_LEFT + weeks.length * STEP;
   const gridHeight = MARGIN_TOP + 7 * STEP;
   const height = gridHeight + LEGEND_HEIGHT;
- 
+
   const legendColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
   const legendStartX = width - legendColors.length * 14 - 40;
   const legendY = gridHeight + 12;
@@ -107,7 +107,7 @@ async function main() {
     legend += `<rect x="${legendStartX + i * 14}" y="${legendY}" width="10" height="10" rx="2" fill="${color}"/>\n`;
   });
   legend += `<text class="lbl" x="${legendStartX + legendColors.length * 14 + 4}" y="${legendY + 9}">More</text>\n`;
- 
+
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img">
 <title>${USERNAME}'s contribution graph</title>
 <style>
@@ -130,7 +130,7 @@ async function main() {
 </style>
 ${monthLabels}${dayLabels}${rects}${legend}</svg>
 `;
- 
+
   const outDir = path.join(__dirname, "..", "dist");
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, "contribution-graph.svg"), svg);
