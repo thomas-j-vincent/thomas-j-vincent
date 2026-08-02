@@ -25,8 +25,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GRAPH_TOKEN }}
         run: node scripts/generate-graph.js
 
-      - name: Commit updated graph
+      - name: Generate banner
+        env:
+          GH_USERNAME: ${{ github.repository_owner }}
+          GH_TOKEN: ${{ secrets.GRAPH_TOKEN }}
+        run: node scripts/generate-banner.js
+
+      - name: Commit updated files
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update contribution graph"
-          file_pattern: dist/contribution-graph.svg
+          file_pattern: "dist/contribution-graph.svg dist/contribution-banner.svg"
