@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 463 32" width="463" height="32" role="img">
-<title>511 contributions in the last year</title>
+<title>514 contributions in the last year</title>
 <style>
   .label {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -12,11 +12,6 @@
     font-size: 12px;
     fill: #24292f;
   }
-  .btn {
-    fill: #f6f8fa;
-    stroke: #d0d7de;
-    stroke-width: 1px;
-  }
   .chevron {
     stroke: #24292f;
     stroke-width: 1.4px;
@@ -27,12 +22,10 @@
   @media (prefers-color-scheme: dark) {
     .label { fill: #e6edf3; }
     .btn-text { fill: #c9d1d9; }
-    .btn { fill: #21262d; stroke: #30363d; }
     .chevron { stroke: #c9d1d9; }
   }
 </style>
-<text class="label" x="4" y="21"><tspan font-weight="600">511</tspan> contributions in the last year</text>
-<rect class="btn" x="265" y="3" width="194" height="26" rx="6"/>
+<text class="label" x="4" y="21"><tspan font-weight="600">514</tspan> contributions in the last year</text>
 <text class="btn-text" x="277" y="20">Contribution settings</text>
 <polyline class="chevron" points="444,13 449,18 454,13"/>
 </svg>
