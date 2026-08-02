@@ -1,10 +1,9 @@
-![](github_banner.png)  <br>
-
-
-
-
-
-
+![](github_banner.png)
+<br>
+I'm currently a university student studying mechanical engineering with a desire to work in either quantitative finance or the aeronautics industry, and would welcome any help getting into either of those fields in the united kingdom. I'm looking to gain experience in coding simulations or bots in languages such as python, C++ and javascript so if you have any projects you need help with feel free to let me know!
+<br>
+<br>
+<br>
 ![My contribution graph](https://raw.githubusercontent.com/thomas-j-vincent/thomas-j-vincent/main/dist/contribution-graph.svg)
 
 <!--
