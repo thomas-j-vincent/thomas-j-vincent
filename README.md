@@ -1,5 +1,7 @@
 ![](github_banner.png)
 
+![My contribution graph](https://raw.githubusercontent.com/thomas-j-vincent/thomas-j-vincent/main/dist/contribution-graph.svg)
+
 <!--
 **thomas-j-vincent/thomas-j-vincent** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
