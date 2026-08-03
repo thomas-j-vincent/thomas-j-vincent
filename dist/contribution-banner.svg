@@ -1,31 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 463 32" width="463" height="32" role="img">
-<title>515 contributions in the last year</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 798 32" width="798" height="32" role="img">
+<title>518 contributions in the last year</title>
 <style>
   .label {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 14px;
     fill: #1f2328;
   }
-  .label strong { font-weight: 600; }
   .btn-text {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 12px;
     fill: #24292f;
   }
-  .chevron {
-    stroke: #24292f;
-    stroke-width: 1.4px;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .btn {
+    fill: #f6f8fa;
+    stroke: #d0d7de;
+    stroke-width: 1px;
   }
+  .chevron { fill: #57606a; }
   @media (prefers-color-scheme: dark) {
     .label { fill: #e6edf3; }
     .btn-text { fill: #c9d1d9; }
-    .chevron { stroke: #c9d1d9; }
+    .btn { fill: #21262d; stroke: #30363d; }
+    .chevron { fill: #8b949e; }
   }
 </style>
-<text class="label" x="4" y="21"><tspan font-weight="600">515</tspan> contributions in the last year</text>
-<text class="btn-text" x="277" y="20">Contribution settings</text>
-<polyline class="chevron" points="444,13 449,18 454,13"/>
+<text class="label" x="14" y="21"><tspan font-weight="600">518</tspan> contributions in the last year</text>
+<rect class="btn" x="614" y="3" width="170" height="26" rx="6"/>
+<text class="btn-text" x="626" y="20">Contribution settings</text>
+<g transform="translate(760, 10)">
+  <path class="chevron" fill-rule="evenodd" clip-rule="evenodd" d="M2.22 4.22a.75.75 0 0 1 1.06 0L6 6.94l2.72-2.72a.75.75 0 1 1 1.06 1.06L6.53 8.53a.75.75 0 0 1-1.06 0L2.22 5.28a.75.75 0 0 1 0-1.06Z"/>
+</g>
 </svg>
