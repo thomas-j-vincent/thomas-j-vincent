@@ -10,8 +10,8 @@ I'm currently a university student studying mechanical engineering with a desire
 <!--
 ![My contribution banner](https://raw.githubusercontent.com/thomas-j-vincent/thomas-j-vincent/main/dist/contribution-banner.svg)
 -->
-<img src="/dist/contribution-banner.svg">
-<img src="/dist/contribution-graph.svg">
+<img src="/dist/contribution-banner.svg"><img src="/dist/contribution-graph.svg">
+
 <!--
 ![My contribution graph](https://raw.githubusercontent.com/thomas-j-vincent/thomas-j-vincent/main/dist/contribution-graph.svg)
 

@@ -58,7 +58,7 @@ async function main() {
   // Match the graph's width exactly, so the two images line up when
   // stacked in your README.
   const width = computeGraphWidth(weekCount);
-  const HEIGHT = 32;
+  const HEIGHT = 24;
 
  // const BUTTON_LABEL = "Contribution settings";
   //const BUTTON_PADDING_X = 12;
