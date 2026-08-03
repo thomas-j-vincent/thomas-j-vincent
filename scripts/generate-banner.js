@@ -100,6 +100,7 @@ async function main() {
   }
 </style>
 <text class="label" x="${OUTER_PADDING}" y="${HEIGHT / 2 + 5}"><tspan font-weight="600">${totalFormatted}</tspan> contributions in the last year</text>
+</svg>
 `;
 
   const outDir = path.join(__dirname, "..", "dist");
