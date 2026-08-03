@@ -59,6 +59,9 @@ async function main() {
     MARGIN_LEFT,
     MARGIN_TOP,
     LEGEND_HEIGHT,
+    LEVEL_COLORS_LIGHT,
+    LEVEL_COLORS_DARK,
+    levelFromColor,
     computeGraphWidth,
   } = require("./graph-config");
   const STAGGER = 0.012; // seconds added per square, in load order
@@ -91,7 +94,8 @@ async function main() {
       const x = OFFSET_X + weekIdx * STEP;
       const y = OFFSET_Y + dayIdx * STEP;
       const delay = (index * STAGGER).toFixed(3);
-      rects += `<rect class="cell" x="${x}" y="${y}" width="${CELL}" height="${CELL}" rx="2" fill="${day.color}" style="animation-delay:${delay}s"><title>${day.date}: ${day.contributionCount} contributions</title></rect>\n`;
+      const level = levelFromColor(day.color, day.contributionCount);
+      rects += `<rect class="cell lvl${level}" x="${x}" y="${y}" width="${CELL}" height="${CELL}" rx="2" style="animation-delay:${delay}s"><title>${day.date}: ${day.contributionCount} contributions</title></rect>\n`;
       index++;
     });
   });
@@ -110,20 +114,26 @@ async function main() {
   const gridHeight = OFFSET_Y + 7 * STEP; // bottom of the last row of squares
   const height = contentHeight + OUTER_PADDING * 2;
 
-  const legendColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
-  const legendStartX = width - OUTER_PADDING - legendColors.length * 14 - 40;
+  const legendStartX = width - OUTER_PADDING - LEVEL_COLORS_LIGHT.length * 14 - 40;
   const legendY = gridHeight + 12;
   let legend = `<text class="lbl" x="${legendStartX - 26}" y="${legendY + 9}">Less</text>\n`;
-  legendColors.forEach((color, i) => {
-    legend += `<rect x="${legendStartX + i * 14}" y="${legendY}" width="10" height="10" rx="2" fill="${color}"/>\n`;
+  LEVEL_COLORS_LIGHT.forEach((_, i) => {
+    legend += `<rect class="lvl${i}" x="${legendStartX + i * 14}" y="${legendY}" width="10" height="10" rx="2"/>\n`;
   });
-  legend += `<text class="lbl" x="${legendStartX + legendColors.length * 14 + 4}" y="${legendY + 9}">More</text>\n`;
+  legend += `<text class="lbl" x="${legendStartX + LEVEL_COLORS_LIGHT.length * 14 + 4}" y="${legendY + 9}">More</text>\n`;
 
   // The border that frames the whole graph, like the card GitHub draws
   // around the real contribution graph.
   const border = `<rect class="border" x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="6"/>\n`;
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img" style="color-scheme: light dark;">
+  const levelStylesLight = LEVEL_COLORS_LIGHT.map(
+    (color, i) => `  .lvl${i} { fill: ${color}; }`
+  ).join("\n");
+  const levelStylesDark = LEVEL_COLORS_DARK.map(
+    (color, i) => `    .lvl${i} { fill: ${color}; }`
+  ).join("\n");
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img">
 <title>${USERNAME}'s contribution graph</title>
 <style>
   .cell {
@@ -149,10 +159,12 @@ async function main() {
     stroke: #d0d7de;
     stroke-width: 1px;
   }
+${levelStylesLight}
   @media (prefers-color-scheme: dark) {
-    .cell { stroke: rgba(240, 246, 252, 0.12); }
     .border { stroke: #30363d; }
-    .lbl { fill: #8b949e; }
+    .lbl { fill: #848d97; }
+    .cell { stroke: rgba(240, 246, 252, 0.06); }
+${levelStylesDark}
   }
 </style>
 ${border}${monthLabels}${dayLabels}${rects}${legend}</svg>

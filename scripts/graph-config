@@ -16,6 +16,33 @@ function computeGraphWidth(weekCount) {
   return OUTER_PADDING * 2 + MARGIN_LEFT + weekCount * STEP;
 }
 
+// GitHub's own five-shade palettes, light and dark. The GraphQL API only
+// ever returns light-theme hex codes in `day.color` — there's no way to
+// ask it for dark-theme colours directly. So instead of using that hex
+// code as a fill colour directly, we use it to work out which of the 5
+// shades (0 = no contributions, 4 = most) a day falls into, then let CSS
+// pick the matching light or dark colour depending on the viewer's system
+// setting.
+const LEVEL_COLORS_LIGHT = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+const LEVEL_COLORS_DARK = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
+
+// Works out the 0-4 shade level for a day. Tries to match the API's own
+// light-theme colour first, since that's authoritative for how GitHub
+// itself bucketed that day. Falls back to a rough guess from the count
+// only if an unrecognised colour ever comes back.
+function levelFromColor(colorHex, contributionCount) {
+  const index = LEVEL_COLORS_LIGHT.findIndex(
+    (c) => c.toLowerCase() === String(colorHex).toLowerCase()
+  );
+  if (index !== -1) return index;
+
+  if (contributionCount === 0) return 0;
+  if (contributionCount <= 3) return 1;
+  if (contributionCount <= 6) return 2;
+  if (contributionCount <= 9) return 3;
+  return 4;
+}
+
 module.exports = {
   CELL,
   GAP,
@@ -24,5 +51,8 @@ module.exports = {
   MARGIN_LEFT,
   MARGIN_TOP,
   LEGEND_HEIGHT,
+  LEVEL_COLORS_LIGHT,
+  LEVEL_COLORS_DARK,
+  levelFromColor,
   computeGraphWidth,
 };
