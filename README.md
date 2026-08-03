@@ -8,6 +8,7 @@ I'm currently a university student studying mechanical engineering with a desire
 <br>
 <br>
 ![My contribution banner](https://raw.githubusercontent.com/thomas-j-vincent/thomas-j-vincent/main/dist/contribution-banner.svg)
+<img src="/dist/contribution-banner.svg"> alt="not handwritten">
 ![My contribution graph](https://raw.githubusercontent.com/thomas-j-vincent/thomas-j-vincent/main/dist/contribution-graph.svg)
 
 <!--
