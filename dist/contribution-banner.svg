@@ -16,18 +16,10 @@
     stroke: #d0d7de;
     stroke-width: 1px;
   }
-  .chevron { fill: #57606a; }
   @media (prefers-color-scheme: dark) {
     .label { fill: #e6edf3; }
     .btn-text { fill: #c9d1d9; }
     .btn { fill: #21262d; stroke: #30363d; }
-    .chevron { fill: #8b949e; }
   }
 </style>
 <text class="label" x="14" y="21"><tspan font-weight="600">518</tspan> contributions in the last year</text>
-<rect class="btn" x="614" y="3" width="170" height="26" rx="6"/>
-<text class="btn-text" x="626" y="20">Contribution settings</text>
-<g transform="translate(760, 10)">
-  <path class="chevron" fill-rule="evenodd" clip-rule="evenodd" d="M2.22 4.22a.75.75 0 0 1 1.06 0L6 6.94l2.72-2.72a.75.75 0 1 1 1.06 1.06L6.53 8.53a.75.75 0 0 1-1.06 0L2.22 5.28a.75.75 0 0 1 0-1.06Z"/>
-</g>
-</svg>
