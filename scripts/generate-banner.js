@@ -60,20 +60,20 @@ async function main() {
   const width = computeGraphWidth(weekCount);
   const HEIGHT = 32;
 
-  const BUTTON_LABEL = "Contribution settings";
-  const BUTTON_PADDING_X = 12;
-  const ICON_SIZE = 12;
-  const ICON_GAP = 4; // small gap between the label text and the icon
-  const CHAR_WIDTH = 7.2; // rough width per character at 14px font size
+ // const BUTTON_LABEL = "Contribution settings";
+  //const BUTTON_PADDING_X = 12;
+  //const ICON_SIZE = 12;
+  //const ICON_GAP = 4; // small gap between the label text and the icon
+  //const CHAR_WIDTH = 7.2; // rough width per character at 14px font size
 
-  const buttonTextWidth = Math.ceil(BUTTON_LABEL.length * CHAR_WIDTH * (12 / 14));
-  const buttonWidth = BUTTON_PADDING_X + buttonTextWidth + ICON_GAP + ICON_SIZE + BUTTON_PADDING_X;
-  const buttonHeight = 26;
-  const buttonX = width - OUTER_PADDING - buttonWidth;
-  const buttonY = (HEIGHT - buttonHeight) / 2;
+  //const buttonTextWidth = Math.ceil(BUTTON_LABEL.length * CHAR_WIDTH * (12 / 14));
+  //const buttonWidth = BUTTON_PADDING_X + buttonTextWidth + ICON_GAP + ICON_SIZE + BUTTON_PADDING_X;
+  //const buttonHeight = 26;
+  //const buttonX = width - OUTER_PADDING - buttonWidth;
+  //const buttonY = (HEIGHT - buttonHeight) / 2;
 
-  const iconX = buttonX + buttonWidth - BUTTON_PADDING_X - ICON_SIZE;
-  const iconY = buttonY + (buttonHeight - ICON_SIZE) / 2;
+  //const iconX = buttonX + buttonWidth - BUTTON_PADDING_X - ICON_SIZE;
+  //const iconY = buttonY + (buttonHeight - ICON_SIZE) / 2;
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${HEIGHT}" width="${width}" height="${HEIGHT}" role="img">
 <title>${totalFormatted} contributions in the last year</title>
@@ -93,21 +93,13 @@ async function main() {
     stroke: #d0d7de;
     stroke-width: 1px;
   }
-  .chevron { fill: #57606a; }
   @media (prefers-color-scheme: dark) {
     .label { fill: #e6edf3; }
     .btn-text { fill: #c9d1d9; }
     .btn { fill: #21262d; stroke: #30363d; }
-    .chevron { fill: #8b949e; }
   }
 </style>
 <text class="label" x="${OUTER_PADDING}" y="${HEIGHT / 2 + 5}"><tspan font-weight="600">${totalFormatted}</tspan> contributions in the last year</text>
-<rect class="btn" x="${buttonX}" y="${buttonY}" width="${buttonWidth}" height="${buttonHeight}" rx="6"/>
-<text class="btn-text" x="${buttonX + BUTTON_PADDING_X}" y="${HEIGHT / 2 + 4}">${BUTTON_LABEL}</text>
-<g transform="translate(${iconX}, ${iconY})">
-  <path class="chevron" fill-rule="evenodd" clip-rule="evenodd" d="M2.22 4.22a.75.75 0 0 1 1.06 0L6 6.94l2.72-2.72a.75.75 0 1 1 1.06 1.06L6.53 8.53a.75.75 0 0 1-1.06 0L2.22 5.28a.75.75 0 0 1 0-1.06Z"/>
-</g>
-</svg>
 `;
 
   const outDir = path.join(__dirname, "..", "dist");
