@@ -1,4 +1,7 @@
-![](github_banner.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="github_bannerDark.jpg">
+  <img src="github_banner.png" alt="GitHub banner">
+</picture>
 <br>
 <br>
 I'm currently a university student studying mechanical engineering with a desire to work in either quantitative finance or the aeronautics industry, and would welcome any help getting into either of those fields in the united kingdom. I'm looking to gain experience in coding simulations or bots in languages such as python, C++ and javascript so feel free to reach out if you have any projects you need help with or need a partner for a hackathon (although i've never done one before) 
