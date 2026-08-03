@@ -123,7 +123,7 @@ async function main() {
   // around the real contribution graph.
   const border = `<rect class="border" x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="6"/>\n`;
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img">
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img" style="color-scheme: light dark;">
 <title>${USERNAME}'s contribution graph</title>
 <style>
   .cell {
@@ -150,8 +150,9 @@ async function main() {
     stroke-width: 1px;
   }
   @media (prefers-color-scheme: dark) {
+    .cell { stroke: rgba(240, 246, 252, 0.12); }
     .border { stroke: #30363d; }
-    .lbl { fill: #848d97; }
+    .lbl { fill: #8b949e; }
   }
 </style>
 ${border}${monthLabels}${dayLabels}${rects}${legend}</svg>
