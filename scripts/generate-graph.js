@@ -51,14 +51,17 @@ async function main() {
   const json = await res.json();
   const weeks = json.data.user.contributionsCollection.contributionCalendar.weeks;
 
-  const CELL = 11;
-  const GAP = 3;
-  const STEP = CELL + GAP;
-  const STAGGER = 0.015; // seconds added per square, in load order
-  const OUTER_PADDING = 14; // gap between the border and everything inside it
-  const MARGIN_LEFT = 28;   // room for "Mon" / "Wed" / "Fri", inside the border
-  const MARGIN_TOP = 18;    // room for month names, inside the border
-  const LEGEND_HEIGHT = 22; // room for the "Less -> More" legend, inside the border
+  const {
+    CELL,
+    GAP,
+    STEP,
+    OUTER_PADDING,
+    MARGIN_LEFT,
+    MARGIN_TOP,
+    LEGEND_HEIGHT,
+    computeGraphWidth,
+  } = require("./graph-config");
+  const STAGGER = 0.012; // seconds added per square, in load order
   const MONTH_NAMES = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
@@ -100,11 +103,10 @@ async function main() {
 <text class="lbl" x="${OUTER_PADDING}" y="${OFFSET_Y + 5 * STEP + 9}">Fri</text>
 `;
 
-  const contentWidth = MARGIN_LEFT + weeks.length * STEP;
   const contentGridHeight = MARGIN_TOP + 7 * STEP;
   const contentHeight = contentGridHeight + LEGEND_HEIGHT;
 
-  const width = contentWidth + OUTER_PADDING * 2;
+  const width = computeGraphWidth(weeks.length);
   const gridHeight = OFFSET_Y + 7 * STEP; // bottom of the last row of squares
   const height = contentHeight + OUTER_PADDING * 2;
 
@@ -139,7 +141,7 @@ async function main() {
   }
   .lbl {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 12px;
+    font-size: 9px;
     fill: #656d76;
   }
   .border {

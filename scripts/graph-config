@@ -1,0 +1,28 @@
+// graph-config.js
+// Sizing numbers shared between generate-graph.js and generate-banner.js,
+// so the banner always lines up with the graph underneath it.
+
+const CELL = 11;
+const GAP = 3;
+const STEP = CELL + GAP;
+const OUTER_PADDING = 14; // gap between the border and everything inside it
+const MARGIN_LEFT = 28;   // room for "Mon" / "Wed" / "Fri", inside the border
+const MARGIN_TOP = 18;    // room for month names, inside the border
+const LEGEND_HEIGHT = 22; // room for the "Less -> More" legend, inside the border
+
+// Same formula the graph uses for its own width — kept in one place so
+// the banner can match it exactly, whatever the week count turns out to be.
+function computeGraphWidth(weekCount) {
+  return OUTER_PADDING * 2 + MARGIN_LEFT + weekCount * STEP;
+}
+
+module.exports = {
+  CELL,
+  GAP,
+  STEP,
+  OUTER_PADDING,
+  MARGIN_LEFT,
+  MARGIN_TOP,
+  LEGEND_HEIGHT,
+  computeGraphWidth,
+};

@@ -1,7 +1,8 @@
 // generate-banner.js
 // Builds the small SVG banner that normally sits above the graph:
 // "N contributions in the last year" on the left, a
-// "Contribution settings ⌄" button on the right.
+// "Contribution settings v" button on the right, aligned to the same
+// width as the graph produced by generate-graph.js.
 //
 // The button is drawn to look like GitHub's, but it cannot actually open
 // a menu. GitHub loads this SVG through an <img> tag in your README, and
@@ -10,6 +11,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { OUTER_PADDING, computeGraphWidth } = require("./graph-config");
 
 const USERNAME = process.env.GH_USERNAME;
 const TOKEN = process.env.GH_TOKEN;
@@ -25,6 +27,9 @@ query ($login: String!) {
     contributionsCollection {
       contributionCalendar {
         totalContributions
+        weeks {
+          firstDay
+        }
       }
     }
   }
@@ -45,68 +50,70 @@ async function main() {
   }
 
   const json = await res.json();
-  const total = json.data.user.contributionsCollection.contributionCalendar.totalContributions;
+  const calendar = json.data.user.contributionsCollection.contributionCalendar;
+  const total = calendar.totalContributions;
+  const weekCount = calendar.weeks.length;
   const totalFormatted = total.toLocaleString("en-GB");
 
-  const label = `${totalFormatted} contributions in the last year`;
-
-  // There's no text-measuring tool available here, so width is estimated
-  // from character count. This is approximate, not exact, but close
-  // enough for a banner like this.
-  const CHAR_WIDTH = 7.2; // rough width per character at 14px font size
-  const labelWidth = Math.ceil(label.length * CHAR_WIDTH);
-
+  // Match the graph's width exactly, so the two images line up when
+  // stacked in your README.
+  const width = computeGraphWidth(weekCount);
   const HEIGHT = 32;
-  const PADDING = 4;
+
   const BUTTON_LABEL = "Contribution settings";
   const BUTTON_PADDING_X = 12;
-  const CHEVRON_GAP = 18;
-  const buttonTextWidth = Math.ceil(BUTTON_LABEL.length * CHAR_WIDTH);
-  const buttonWidth = buttonTextWidth + BUTTON_PADDING_X * 2 + CHEVRON_GAP;
-  const GAP_BETWEEN = 16;
+  const ICON_SIZE = 12;
+  const ICON_GAP = 4; // small gap between the label text and the icon
+  const CHAR_WIDTH = 7.2; // rough width per character at 14px font size
 
-  const width = PADDING + labelWidth + GAP_BETWEEN + buttonWidth + PADDING;
+  const buttonTextWidth = Math.ceil(BUTTON_LABEL.length * CHAR_WIDTH * (12 / 14));
+  const buttonWidth = BUTTON_PADDING_X + buttonTextWidth + ICON_GAP + ICON_SIZE + BUTTON_PADDING_X;
+  const buttonHeight = 26;
+  const buttonX = width - OUTER_PADDING - buttonWidth;
+  const buttonY = (HEIGHT - buttonHeight) / 2;
 
-  const buttonX = width - PADDING - buttonWidth;
-  const buttonY = (HEIGHT - 26) / 2;
+  const iconX = buttonX + buttonWidth - BUTTON_PADDING_X - ICON_SIZE;
+  const iconY = buttonY + (buttonHeight - ICON_SIZE) / 2;
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${HEIGHT}" width="${width}" height="${HEIGHT}" role="img">
-<title>${label}</title>
+<title>${totalFormatted} contributions in the last year</title>
 <style>
   .label {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 14px;
     fill: #1f2328;
   }
-  .label strong { font-weight: 600; }
   .btn-text {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 12px;
     fill: #24292f;
   }
-  .chevron {
-    stroke: #24292f;
-    stroke-width: 1.4px;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .btn {
+    fill: #f6f8fa;
+    stroke: #d0d7de;
+    stroke-width: 1px;
   }
+  .chevron { fill: #57606a; }
   @media (prefers-color-scheme: dark) {
     .label { fill: #e6edf3; }
     .btn-text { fill: #c9d1d9; }
-    .chevron { stroke: #c9d1d9; }
+    .btn { fill: #21262d; stroke: #30363d; }
+    .chevron { fill: #8b949e; }
   }
 </style>
-<text class="label" x="${PADDING}" y="${HEIGHT / 2 + 5}"><tspan font-weight="600">${totalFormatted}</tspan> contributions in the last year</text>
+<text class="label" x="${OUTER_PADDING}" y="${HEIGHT / 2 + 5}"><tspan font-weight="600">${totalFormatted}</tspan> contributions in the last year</text>
+<rect class="btn" x="${buttonX}" y="${buttonY}" width="${buttonWidth}" height="${buttonHeight}" rx="6"/>
 <text class="btn-text" x="${buttonX + BUTTON_PADDING_X}" y="${HEIGHT / 2 + 4}">${BUTTON_LABEL}</text>
-<polyline class="chevron" points="${buttonX + buttonWidth - CHEVRON_GAP + 3},${HEIGHT / 2 - 3} ${buttonX + buttonWidth - CHEVRON_GAP + 8},${HEIGHT / 2 + 2} ${buttonX + buttonWidth - CHEVRON_GAP + 13},${HEIGHT / 2 - 3}"/>
+<g transform="translate(${iconX}, ${iconY})">
+  <path class="chevron" fill-rule="evenodd" clip-rule="evenodd" d="M2.22 4.22a.75.75 0 0 1 1.06 0L6 6.94l2.72-2.72a.75.75 0 1 1 1.06 1.06L6.53 8.53a.75.75 0 0 1-1.06 0L2.22 5.28a.75.75 0 0 1 0-1.06Z"/>
+</g>
 </svg>
 `;
 
   const outDir = path.join(__dirname, "..", "dist");
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, "contribution-banner.svg"), svg);
-  console.log(`Wrote banner (${totalFormatted} contributions) to dist/contribution-banner.svg`);
+  console.log(`Wrote banner (${totalFormatted} contributions, width ${width}) to dist/contribution-banner.svg`);
 }
 
 main().catch((err) => {
